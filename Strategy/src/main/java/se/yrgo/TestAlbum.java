@@ -13,37 +13,25 @@ public class TestAlbum {
                 new Album("Best of", "Mozart", Album.Genre.CLASSICAL),
                 new Album("Thank you for the music", "ABBA", Album.Genre.POP)
         };
-        printAlbums(albums);
-
-        System.out.println("----------------------------");
-
-        printNotPopAlbums(albums);
-
-        System.out.println("----------------------------");
-
-        printPopAlbums(albums);
-    }
-
-    static void printAlbums(Album[] albums) {
-        for(Album a : albums) {
-            System.out.println(a);
-        }
-    }
-
-    static void printNotPopAlbums(Album[] albums){
-        FilterAlbum filter = new FilterOutPop();
-        for (Album a : albums){
-            if (filter.filterGenre(a)){
-                System.out.println(a);
-            }
-        }
-    }
-    static void printPopAlbums(Album[] albums){
         FilterAlbum filter = new FilterPop();
-        for (Album a : albums){
-            if (filter.filterGenre(a)){
+        System.out.println("Print Pop-Albums:\n");
+        printAlbums(albums, filter);
+        System.out.println("------------------------");
+        System.out.println("Do not print Pop-Albums:\n");
+        filter = new FilterOutPop();
+        printAlbums(albums, filter);
+
+
+    }
+
+    static void printAlbums(Album[] albums, FilterAlbum filter) {
+        for(Album a : albums) {
+            if (filter.permit(a)){
                 System.out.println(a);
             }
+
         }
     }
+
+
 }
